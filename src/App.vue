@@ -27,13 +27,19 @@ html, body{
   box-sizing: inherit;
 }
 
-body{
-  margin-top: -16px;
-}
-
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   color: #2c3e50;
   height: 100%;
+}
+
+.footer {
+  height: 82px;
+  text-align: center;
+  padding: 2px
+}
+
+.footer p {
+  margin: .40em;
 }
 </style>
