@@ -1,15 +1,17 @@
 <template>
   <div id="app">
+    <Quote />
     <Footer />
   </div>
 </template>
 
 <script>
 import Footer from './components/layout/Footer.vue'
+import Quote from './components/Quote.vue'
 
 export default {
   name: 'app',
-  components: { Footer }
+  components: { Footer, Quote }
 }
 </script>
 
