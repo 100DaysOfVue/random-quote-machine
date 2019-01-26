@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'quote',
   data () {
@@ -23,6 +25,17 @@ export default {
   methods: {
     toogleQuote () {
       this.quote = !this.quote
+
+      axios.get(`https://andruxnet-random-famous-quotes.p.rapidapi.com/?count=1&cat=famous`,
+        {
+          headers: { 'X-RapidAPI-Key': '25ed2d9f1emshd52da26ac7daa32p1fb264jsn803f1bfb8c17' }
+        }
+      )
+        .then(res => console.log(res))
+        .catch(e => console.log(e))
+    },
+    getQuote (aasd) {
+      console.log(aasd)
     }
   }
 }
