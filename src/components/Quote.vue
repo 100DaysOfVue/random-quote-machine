@@ -13,7 +13,9 @@
         >
           Get your Quote
         </button>
-        <button v-if="quoteState" class="btn btn__twitter"></button>
+        <button v-if="quoteState" class="btn btn__twitter">
+          <a :href="twitterUrl" class="twitter-share-button" target="_blank"></a>
+        </button>
       </div>
     </div>
   </div>
@@ -28,7 +30,8 @@ export default {
     return {
       quoteState: false,
       quote: '',
-      quoteAuthor: ''
+      quoteAuthor: '',
+      twitterUrl: ''
     }
   },
   methods: {
@@ -45,6 +48,7 @@ export default {
         .then(res => {
           this.quote = res.data[0].quote
           this.quoteAuthor = res.data[0].author
+          this.twitterUrl = `https://twitter.com/intent/tweet?text=${this.quote} ${this.quoteAuthor}.`
         })
         .catch(e => console.log(e))
     }
@@ -81,8 +85,7 @@ export default {
 
 .quote{
   width: 90%;
-  height: 25vh;
-  border: 1px solid red;
+  height: 27vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -93,7 +96,6 @@ export default {
 }
 
 .btn__container{
-  border: 1px solid blue;
   position: absolute;
   bottom: .4em;
 }
@@ -116,9 +118,13 @@ export default {
 
 .btn__twitter{
   width: 40px;
-  background-color: grey;
-  border-radius: 50%;
+  background: url(../assets/twitter.svg) no-repeat;
   border: none;
   margin-left: 10px;
+  padding: 0;
+}
+
+.btn__twitter > a {
+  padding: 13px 20px;
 }
 </style>
