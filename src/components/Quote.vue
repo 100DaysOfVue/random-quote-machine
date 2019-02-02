@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <h1 v-if="quoteState" class="main__title--up">Random Quote Machine in other div</h1>
+    <h1 v-if="quoteState" class="main__title--up">Random Quote Machine</h1>
     <div class="quote__container">
       <h1 class="main__title--down" v-if="!quoteState">Random Quote machine</h1>
       <div v-else class="quote">
@@ -13,9 +13,7 @@
         >
           Get your Quote
         </button>
-        <button v-if="quoteState" class="btn btn__twitter">
-          <a :href="twitterUrl" class="twitter-share-button" target="_blank"></a>
-        </button>
+        <a :href="twitterUrl" class="btn btn__twitter" target="_blank" v-if="quoteState"></a>
       </div>
     </div>
   </div>
@@ -85,7 +83,7 @@ export default {
 
 .quote{
   width: 90%;
-  height: 27vh;
+  height: 15vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -107,7 +105,7 @@ export default {
 .btn {
   width: 110px;
   height: 40px;
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 .btn--quote {
@@ -121,10 +119,6 @@ export default {
   background: url(../assets/twitter.svg) no-repeat;
   border: none;
   margin-left: 10px;
-  padding: 0;
-}
-
-.btn__twitter > a {
-  padding: 13px 20px;
+  padding: 11px 20px;
 }
 </style>
