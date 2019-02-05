@@ -35,7 +35,7 @@ export default {
   methods: {
     changeQuoteStauts (ev) {
       if (!this.quoteState) {
-        this.animateElements()
+        this.animateElements(ev.target)
       }
       this.getQuote()
     },
@@ -55,6 +55,7 @@ export default {
     },
     animateElements (button, container) {
       this.animateTitle()
+      this.animateButton(button)
     },
     animateTitle () {
       const $title = document.getElementsByClassName('main__title--down')
@@ -66,6 +67,25 @@ export default {
         fill: 'forwards'
       })
       moveUp.play()
+    },
+    animateButton (button) {
+      // animate button
+      const changeSize = button.animate([
+        {
+          height: '50px',
+          width: '181px',
+          fontSize: '1.5em'
+        },
+        {
+          height: '40px',
+          width: '110px',
+          fontSize: '13px'
+        }
+      ], {
+        duration: 500,
+        fill: 'forwards'
+      })
+      changeSize.play()
     }
   }
 }
