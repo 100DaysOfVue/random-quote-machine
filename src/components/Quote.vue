@@ -2,14 +2,14 @@
   <div class="main">
     <h1 v-if="quoteState" class="main__title--up">Random Quote Machine</h1>
     <div class="quote__container">
-      <h1 class="main__title--down" v-if="!quoteState">Random Quote machine</h1>
+      <h1 class="main__title--down" v-if="!quoteState">Random Quote Machine</h1>
       <div v-else class="quote">
         <p> {{ quote }} </p>
         <p><strong>- {{ quoteAuthor }} -</strong></p>
       </div>
       <div class="btn__container" :class="[quoteState ? 'btn__container--right' : '']">
         <button :class="[quoteState ? 'btn': 'btn--quote']"
-          @click="toogleQuoteStatus"
+          @click="changeQuoteStauts"
         >
           Get your Quote
         </button>
@@ -33,9 +33,11 @@ export default {
     }
   },
   methods: {
-    toogleQuoteStatus (ev) {
+    changeQuoteStauts (ev) {
+      if (!this.quoteState) {
+        this.animateElements()
+      }
       this.getQuote()
-      this.quoteState = true
     },
     getQuote () {
       axios.get(`https://andruxnet-random-famous-quotes.p.rapidapi.com/?count=1&cat=famous`,
@@ -47,8 +49,23 @@ export default {
           this.quote = res.data[0].quote
           this.quoteAuthor = res.data[0].author
           this.twitterUrl = `https://twitter.com/intent/tweet?text=${this.quote} ${this.quoteAuthor}.`
+          this.quoteState = true
         })
         .catch(e => console.log(e))
+    },
+    animateElements (button, container) {
+      this.animateTitle()
+    },
+    animateTitle () {
+      const $title = document.getElementsByClassName('main__title--down')
+      const moveUp = $title[0].animate([
+        { transform: 'translateY(0)' },
+        { transform: 'translateY(-267px)' }
+      ], {
+        duration: 1000,
+        fill: 'forwards'
+      })
+      moveUp.play()
     }
   }
 }
