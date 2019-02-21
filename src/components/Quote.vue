@@ -13,7 +13,7 @@
         >
           Get your Quote
         </button>
-        <a :href="twitterUrl" class="btn btn__twitter" target="_blank" v-if="quoteState"></a>
+        <a id="tweet" :href="twitterUrl" class="btn btn__twitter" target="_blank" v-if="quoteState"></a>
       </div>
     </div>
   </div>
@@ -38,6 +38,8 @@ export default {
         this.animateElements(ev.target, ev.target.parentElement)
       }
       this.getQuote()
+      // eslint-disable-next-line
+      setTimeout(() => this.quoteState = true, 2500)
     },
     getQuote () {
       axios.get(`https://andruxnet-random-famous-quotes.p.rapidapi.com/?count=1&cat=famous`,
@@ -49,7 +51,6 @@ export default {
           this.quote = res.data[0].quote
           this.quoteAuthor = res.data[0].author
           this.twitterUrl = `https://twitter.com/intent/tweet?text=${this.quote} ${this.quoteAuthor}.`
-          this.quoteState = true
         })
         .catch(e => console.log(e))
     },
@@ -104,9 +105,11 @@ export default {
       ],
       {
         duration: 1000,
-        delay: 1500,
-        easing: 'ease-in-out'
+        delay: 2000,
+        easing: 'ease-in-out',
+        fill: 'forwards'
       })
+
       moveRight.play()
       moveLeft.play()
     }
@@ -179,6 +182,13 @@ export default {
   background: url(../assets/twitter.svg) no-repeat;
   border: none;
   margin-left: 10px;
-  padding: 11px 20px;
+  padding: 0;
+  animation: scalePadding .5s forwards ease-out;
+}
+
+@keyframes scalePadding {
+  to {
+    padding: 11px 20px;
+  }
 }
 </style>
