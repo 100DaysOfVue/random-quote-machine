@@ -63,7 +63,7 @@ export default {
       const $title = document.getElementsByClassName('main__title--down')
       const moveUp = $title[0].animate([
         { transform: 'translateY(0)' },
-        { transform: 'translateY(-267px)' }
+        { transform: 'translateY(-252px)' }
       ], {
         duration: 1000,
         fill: 'forwards'
