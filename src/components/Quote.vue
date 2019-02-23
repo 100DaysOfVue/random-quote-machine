@@ -3,10 +3,15 @@
     <h1 v-if="quoteState" class="main__title--up">Random Quote Machine</h1>
     <div class="quote__container">
       <h1 class="main__title--down" v-if="!quoteState">Random Quote Machine</h1>
-      <div v-else class="quote">
-        <p> {{ quote }} </p>
-        <p><strong>- {{ quoteAuthor }} -</strong></p>
-      </div>
+      <transition mode="out-in" name="slide-fade">
+        <h3 v-if="loading" class="quote quote--loading" key="loading">
+          <p>Loading...</p>
+        </h3>
+        <div v-else class="quote" key="info">
+          <p> {{ quoteInf.quote  }}</p>
+          <p><strong>— {{ quoteInf.author }} —</strong></p>
+        </div>
+      </transition>
       <div class="btn__container" :class="[quoteState ? 'btn__container--right' : '']">
         <button :class="[quoteState ? 'btn': 'btn--quote']"
           @click="changeQuoteStauts"
@@ -26,9 +31,12 @@ export default {
   name: 'quote',
   data () {
     return {
+      loading: false,
       quoteState: false,
-      quote: '',
-      quoteAuthor: '',
+      quoteInf: {
+        quote: '',
+        author: ''
+      },
       twitterUrl: ''
     }
   },
@@ -39,18 +47,22 @@ export default {
       }
       this.getQuote()
       // eslint-disable-next-line
-      setTimeout(() => this.quoteState = true, 2500)
+      setTimeout(() => {
+        this.quoteState = true
+        this.loading = false
+      }, 2500)
     },
     getQuote () {
+      this.loading = true
       axios.get(`https://andruxnet-random-famous-quotes.p.rapidapi.com/?count=1&cat=famous`,
         {
           headers: { 'X-RapidAPI-Key': '25ed2d9f1emshd52da26ac7daa32p1fb264jsn803f1bfb8c17' }
         }
       )
         .then(res => {
-          this.quote = res.data[0].quote
-          this.quoteAuthor = res.data[0].author
-          this.twitterUrl = `https://twitter.com/intent/tweet?text=${this.quote} ${this.quoteAuthor}.`
+          this.quoteInf.quote = res.data[0].quote
+          this.quoteInf.author = res.data[0].author
+          this.twitterUrl = `https://twitter.com/intent/tweet?text=${this.quote} ${this.author}.`
         })
         .catch(e => console.log(e))
     },
@@ -190,5 +202,14 @@ export default {
   to {
     padding: 11px 20px;
   }
+}
+
+.slide-fade-enter-active, .slide-fade-leave-active{
+  transition: all .5s;
+}
+
+.slide-fade-leave-to, .slide-fade-enter{
+  opacity: 0;
+  transform: translateX(100px);
 }
 </style>
