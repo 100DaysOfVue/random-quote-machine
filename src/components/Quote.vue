@@ -8,8 +8,8 @@
           <p>Loading...</p>
         </h3>
         <div v-else class="quote" key="info">
-          <p> {{ quoteInf.quote  }}</p>
-          <p><strong>— {{ quoteInf.author }} —</strong></p>
+          <p> {{ quote  }}</p>
+          <p><strong> {{ author }} </strong></p>
         </div>
       </transition>
       <div class="btn__container" :class="[quoteState ? 'btn__container--right' : '']">
@@ -33,10 +33,8 @@ export default {
     return {
       loading: false,
       quoteState: false,
-      quoteInf: {
-        quote: '',
-        author: ''
-      },
+      quote: '',
+      author: '',
       twitterUrl: ''
     }
   },
@@ -60,9 +58,9 @@ export default {
         }
       )
         .then(res => {
-          this.quoteInf.quote = res.data[0].quote
-          this.quoteInf.author = res.data[0].author
-          this.twitterUrl = `https://twitter.com/intent/tweet?text=${this.quote} ${this.author}.`
+          this.quote = res.data[0].quote
+          this.author = `— ${res.data[0].author} —`
+          this.twitterUrl = `https://twitter.com/intent/tweet?text=${this.quote} ${this.author}`
         })
         .catch(e => console.log(e))
     },
