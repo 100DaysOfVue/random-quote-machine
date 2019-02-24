@@ -8,8 +8,8 @@
           <p>Loading...</p>
         </h3>
         <div v-else class="quote" key="info">
-          <p> {{ quote  }}</p>
-          <p><strong> {{ author }} </strong></p>
+          <blockquote> {{ quote  }}</blockquote>
+          <cite><strong> {{ author }} </strong></cite>
         </div>
       </transition>
       <div class="btn__container" :class="[quoteState ? 'btn__container--right' : '']">
@@ -60,7 +60,7 @@ export default {
       )
         .then(res => {
           this.quote = res.data[0].quote
-          this.author = `— ${res.data[0].author} —`
+          this.author = `— ${res.data[0].author}`
           this.twitterUrl = `https://twitter.com/intent/tweet?text=${this.quote} ${this.author}`
         })
         .catch(e => console.log(e))
@@ -158,14 +158,25 @@ export default {
 
 .quote{
   width: 90%;
-  height: 15vh;
+  height: 23vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-.quote > p {
-  margin: 0;
+blockquote{
+  margin: 0 0 15px;
+}
+
+blockquote::before{
+  content: open-quote;
+  font-size: 2em;
+  line-height: 1;
+}
+blockquote::after{
+  content: close-quote;
+  font-size: 2em;
+  line-height: 1;
 }
 
 .btn__container{
