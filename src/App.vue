@@ -27,6 +27,19 @@ html, body{
   box-sizing: inherit;
 }
 
+:root{
+  --quote-height: 23vh;
+  --quote-container-height: 150px;
+  --quote-container-width: 50%;
+  --quote-container-background: mistyrose;
+  --animation-move-up: 252px;
+  --links-color: black;
+  --links-color-visited: red;
+  --btn-color: gray;
+  --btn-background-color: lightblue;
+  --footer-height: 82px;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   color: #2c3e50;
