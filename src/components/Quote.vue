@@ -18,6 +18,7 @@
         >
           Get your Quote
         </button>
+        <!-- remove the tweet id -->
         <a id="tweet" :href="twitterUrl" class="btn btn__twitter" target="_blank" v-if="quoteState"></a>
       </div>
     </div>
@@ -64,6 +65,7 @@ export default {
         })
         .catch(e => console.log(e))
     },
+    // remove this function and pass everything to CSS transitions with classes
     animateElements (button, container) {
       this.animateTitle()
       this.animateButton(button)
