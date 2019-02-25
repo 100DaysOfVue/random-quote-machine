@@ -146,11 +146,11 @@ export default {
   position: relative;
   padding: .4em;
   grid-row: 2;
-  height: 150px;
-  width: 50%;
+  height: var(--quote-container-height);
+  width: var(--quote-container-width);
   justify-self: center;
   align-self: center;
-  background-color: mistyrose;
+  background-color: var(--quote-container-background);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -158,7 +158,7 @@ export default {
 
 .quote{
   width: 90%;
-  height: 23vh;
+  height: var(--quote-height);
   display: flex;
   flex-direction: column;
   justify-content: space-around;

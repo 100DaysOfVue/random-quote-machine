@@ -28,7 +28,7 @@ html, body{
 }
 
 :root{
-  --quote-height: 23vh;
+  --quote-height: 15vh;
   --quote-container-height: 150px;
   --quote-container-width: 50%;
   --quote-container-background: mistyrose;
@@ -47,7 +47,7 @@ html, body{
 }
 
 .footer {
-  height: 82px;
+  height: var(--footer-height);
   text-align: center;
   padding: 2px
 }
